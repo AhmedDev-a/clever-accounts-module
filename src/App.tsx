@@ -8,6 +8,10 @@ import NotFound from "./pages/NotFound";
 import ChartOfAccounts from "./pages/ChartOfAccounts";
 import JournalEntries from "./pages/JournalEntries";
 import TrialBalance from "./pages/TrialBalance";
+import Customers from "./pages/Customers";
+import Suppliers from "./pages/Suppliers";
+import BalanceSheet from "./pages/BalanceSheet";
+import IncomeStatement from "./pages/IncomeStatement";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +26,10 @@ const App = () => (
           <Route path="/chart-of-accounts" element={<ChartOfAccounts />} />
           <Route path="/journal-entries" element={<JournalEntries />} />
           <Route path="/trial-balance" element={<TrialBalance />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/suppliers" element={<Suppliers />} />
+          <Route path="/balance-sheet" element={<BalanceSheet />} />
+          <Route path="/income-statement" element={<IncomeStatement />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -14,6 +14,7 @@ import BalanceSheet from "./pages/BalanceSheet";
 import IncomeStatement from "./pages/IncomeStatement";
 import Sales from "./pages/Sales";
 import Trips from "./pages/Trips";
+import './App.css'; // استيراد ملف CSS
 
 const queryClient = new QueryClient();
 
@@ -23,18 +24,18 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/chart-of-accounts">Chart of Accounts</Link></li>
-            <li><Link to="/journal-entries">Journal Entries</Link></li>
-            <li><Link to="/trial-balance">Trial Balance</Link></li>
-            <li><Link to="/customers">Customers</Link></li>
-            <li><Link to="/suppliers">Suppliers</Link></li>
-            <li><Link to="/balance-sheet">Balance Sheet</Link></li>
-            <li><Link to="/income-statement">Income Statement</Link></li>
-            <li><Link to="/sales">Sales</Link></li>
-            <li><Link to="/trips">Trips</Link></li>
+        <nav className="navbar">
+          <ul className="nav-list">
+            <li className="nav-item"><Link to="/">Home</Link></li>
+            <li className="nav-item"><Link to="/chart-of-accounts">Chart of Accounts</Link></li>
+            <li className="nav-item"><Link to="/journal-entries">Journal Entries</Link></li>
+            <li className="nav-item"><Link to="/trial-balance">Trial Balance</Link></li>
+            <li className="nav-item"><Link to="/customers">Customers</Link></li>
+            <li className="nav-item"><Link to="/suppliers">Suppliers</Link></li>
+            <li className="nav-item"><Link to="/balance-sheet">Balance Sheet</Link></li>
+            <li className="nav-item"><Link to="/income-statement">Income Statement</Link></li>
+            <li className="nav-item"><Link to="/sales">Sales</Link></li>
+            <li className="nav-item"><Link to="/trips">Trips</Link></li>
           </ul>
         </nav>
         <Routes>

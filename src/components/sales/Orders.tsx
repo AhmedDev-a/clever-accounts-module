@@ -18,12 +18,13 @@ const sampleOrders = [
   {
     id: 1,
     customerName: "شركة السياحة العالمية",
-    status: "new",
+    status: "negotiation",
     services: ["تذاكر طيران", "حجز فندق", "تأشيرة"],
     totalAmount: 15000,
     paidAmount: 0,
     customerType: "خاص",
-    customerDetailsComplete: true
+    customerDetailsComplete: false,
+    negotiationComplete: true
   },
   {
     id: 2,
@@ -33,7 +34,8 @@ const sampleOrders = [
     totalAmount: 25000,
     paidAmount: 12500,
     customerType: "ثابت",
-    customerDetailsComplete: false
+    customerDetailsComplete: true,
+    negotiationComplete: true
   }
 ];
 
@@ -43,7 +45,7 @@ export const Orders = () => {
       <div className="flex justify-between items-center">
         <Button className="gap-2" disabled>
           <PlayIcon className="w-4 h-4" />
-          إضافة طلب جديد
+          متابعة الطلب
           <span className="text-xs opacity-75">(يتطلب اكتمال بيانات العميل)</span>
         </Button>
       </div>
@@ -83,10 +85,18 @@ export const Orders = () => {
                   </p>
                 </div>
 
-                {!order.customerDetailsComplete && (
+                {order.negotiationComplete && !order.customerDetailsComplete && (
                   <div className="bg-yellow-50 p-2 rounded-md">
                     <p className="text-sm text-yellow-700">
-                      يجب استكمال بيانات العميل قبل المتابعة
+                      تم الانتهاء من المفاوضات. يرجى استكمال بيانات العميل للمتابعة
+                    </p>
+                  </div>
+                )}
+
+                {!order.negotiationComplete && (
+                  <div className="bg-blue-50 p-2 rounded-md">
+                    <p className="text-sm text-blue-700">
+                      يجب إتمام المفاوضات أولاً
                     </p>
                   </div>
                 )}
@@ -97,10 +107,24 @@ export const Orders = () => {
                   <FileText className="w-4 h-4" />
                   التفاصيل
                 </Button>
-                <Button variant="outline" size="sm" className="gap-2">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="gap-2"
+                  disabled={order.negotiationComplete}
+                >
                   <HandshakeIcon className="w-4 h-4" />
                   التفاوض
                 </Button>
+                {order.negotiationComplete && !order.customerDetailsComplete && (
+                  <Button 
+                    variant="secondary"
+                    size="sm"
+                    className="gap-2"
+                  >
+                    استكمال بيانات العميل
+                  </Button>
+                )}
               </div>
             </div>
           </Card>

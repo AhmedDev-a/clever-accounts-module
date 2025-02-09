@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PlusIcon, FileText, UserCheck, Calculator, HandshakeIcon, CreditCard, PlayIcon, CheckCircle } from "lucide-react";
+import { FileText, HandshakeIcon, PlayIcon } from "lucide-react";
 
 const orderStatuses = {
   new: { label: "طلب جديد", color: "bg-blue-500" },
@@ -21,7 +21,9 @@ const sampleOrders = [
     status: "new",
     services: ["تذاكر طيران", "حجز فندق", "تأشيرة"],
     totalAmount: 15000,
-    paidAmount: 0
+    paidAmount: 0,
+    customerType: "خاص",
+    customerDetailsComplete: true
   },
   {
     id: 2,
@@ -29,7 +31,9 @@ const sampleOrders = [
     status: "payment",
     services: ["باقة VIP", "تذاكر طيران"],
     totalAmount: 25000,
-    paidAmount: 12500
+    paidAmount: 12500,
+    customerType: "ثابت",
+    customerDetailsComplete: false
   }
 ];
 
@@ -37,9 +41,10 @@ export const Orders = () => {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <Button className="gap-2">
-          <PlusIcon className="w-4 h-4" />
+        <Button className="gap-2" disabled>
+          <PlayIcon className="w-4 h-4" />
           إضافة طلب جديد
+          <span className="text-xs opacity-75">(يتطلب اكتمال بيانات العميل)</span>
         </Button>
       </div>
 
@@ -51,6 +56,9 @@ export const Orders = () => {
                 <div>
                   <h3 className="font-bold">{order.customerName}</h3>
                   <p className="text-sm text-muted-foreground">طلب #{order.id}</p>
+                  <Badge variant="outline" className="mt-1">
+                    {order.customerType}
+                  </Badge>
                 </div>
                 <Badge variant="secondary" className={`${orderStatuses[order.status].color} text-white`}>
                   {orderStatuses[order.status].label}
@@ -74,6 +82,14 @@ export const Orders = () => {
                     المدفوع: {order.paidAmount.toLocaleString()} ريال
                   </p>
                 </div>
+
+                {!order.customerDetailsComplete && (
+                  <div className="bg-yellow-50 p-2 rounded-md">
+                    <p className="text-sm text-yellow-700">
+                      يجب استكمال بيانات العميل قبل المتابعة
+                    </p>
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-wrap gap-2 pt-2">
@@ -85,59 +101,10 @@ export const Orders = () => {
                   <HandshakeIcon className="w-4 h-4" />
                   التفاوض
                 </Button>
-                <Button variant="outline" size="sm" className="gap-2">
-                  <PlayIcon className="w-4 h-4" />
-                  بدء التنفيذ
-                </Button>
               </div>
             </div>
           </Card>
         ))}
-      </div>
-
-      <div className="mt-8">
-        <h3 className="text-lg font-bold mb-4">مراحل تنفيذ الطلب</h3>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card className="p-4">
-            <div className="flex items-center gap-3">
-              <UserCheck className="w-8 h-8 text-blue-500" />
-              <div>
-                <h4 className="font-bold">استلام الطلب</h4>
-                <p className="text-sm text-muted-foreground">تسجيل متطلبات العميل</p>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="p-4">
-            <div className="flex items-center gap-3">
-              <Calculator className="w-8 h-8 text-yellow-500" />
-              <div>
-                <h4 className="font-bold">التسعير والتفاوض</h4>
-                <p className="text-sm text-muted-foreground">دراسة وتحديد الأسعار</p>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="p-4">
-            <div className="flex items-center gap-3">
-              <CreditCard className="w-8 h-8 text-green-500" />
-              <div>
-                <h4 className="font-bold">الدفع والتعاقد</h4>
-                <p className="text-sm text-muted-foreground">توقيع العقد والدفعة الأولى</p>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="p-4">
-            <div className="flex items-center gap-3">
-              <CheckCircle className="w-8 h-8 text-indigo-500" />
-              <div>
-                <h4 className="font-bold">التنفيذ والتسليم</h4>
-                <p className="text-sm text-muted-foreground">تنفيذ الخدمات وتسليمها</p>
-              </div>
-            </div>
-          </Card>
-        </div>
       </div>
     </div>
   );

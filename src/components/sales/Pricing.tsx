@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -10,29 +9,40 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { PlusIcon, FileText, Send, Pencil } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const samplePricing = [
   {
     id: "1",
     customerName: "شركة السياحة العالمية",
     services: [
-      { name: "تذاكر طيران", price: 5000 },
-      { name: "إقامة فندقية", price: 3000 },
-      { name: "تأشيرة", price: 2000 }
+      { name: "تذاكر طيران", price: 5000, status: "pending" },
+      { name: "إقامة فندقية", price: 3000, status: "approved" },
+      { name: "تأشيرة", price: 2000, status: "pending" }
     ],
-    status: "قيد المراجعة",
+    status: "pending_review",
     totalAmount: 10000,
+    paymentStatus: {
+      initialPayment: false,
+      fullPayment: false,
+      reviewNotes: "في انتظار الدفعة الأولى"
+    },
     date: "2024-03-25"
   },
   {
     id: "2",
     customerName: "مؤسسة السفر الذهبية",
     services: [
-      { name: "باقة VIP", price: 15000 },
-      { name: "تذاكر طيران", price: 8000 }
+      { name: "باقة VIP", price: 15000, status: "approved" },
+      { name: "تذاكر طيران", price: 8000, status: "approved" }
     ],
-    status: "موافق عليه",
+    status: "approved",
     totalAmount: 23000,
+    paymentStatus: {
+      initialPayment: true,
+      fullPayment: false,
+      reviewNotes: "تم استلام الدفعة الأولى"
+    },
     date: "2024-03-26"
   }
 ];
@@ -54,8 +64,8 @@ export const Pricing = () => {
               <TableHead>رقم العرض</TableHead>
               <TableHead>العميل</TableHead>
               <TableHead>التفاصيل</TableHead>
+              <TableHead>حالة الدفع</TableHead>
               <TableHead>المبلغ الإجمالي</TableHead>
-              <TableHead>الحالة</TableHead>
               <TableHead>التاريخ</TableHead>
               <TableHead>الإجراءات</TableHead>
             </TableRow>
@@ -66,16 +76,35 @@ export const Pricing = () => {
                 <TableCell>#{price.id}</TableCell>
                 <TableCell>{price.customerName}</TableCell>
                 <TableCell>
-                  <ul className="list-disc list-inside">
+                  <ul className="list-disc list-inside space-y-1">
                     {price.services.map((service, index) => (
                       <li key={index} className="text-sm">
                         {service.name} - {service.price.toLocaleString()} ريال
+                        <Badge 
+                          variant="outline" 
+                          className={`mr-2 ${
+                            service.status === 'approved' ? 'bg-green-500' : 'bg-yellow-500'
+                          } text-white`}
+                        >
+                          {service.status === 'approved' ? 'معتمد' : 'قيد المراجعة'}
+                        </Badge>
                       </li>
                     ))}
                   </ul>
                 </TableCell>
+                <TableCell>
+                  <div className="space-y-1">
+                    <Badge variant="outline" className={
+                      price.paymentStatus.initialPayment ? 'bg-green-500' : 'bg-yellow-500'
+                    }>
+                      {price.paymentStatus.initialPayment ? 'تم الدفع الأولي' : 'في انتظار الدفع'}
+                    </Badge>
+                    <p className="text-sm text-muted-foreground">
+                      {price.paymentStatus.reviewNotes}
+                    </p>
+                  </div>
+                </TableCell>
                 <TableCell>{price.totalAmount.toLocaleString()} ريال</TableCell>
-                <TableCell>{price.status}</TableCell>
                 <TableCell>{price.date}</TableCell>
                 <TableCell>
                   <div className="flex gap-2">

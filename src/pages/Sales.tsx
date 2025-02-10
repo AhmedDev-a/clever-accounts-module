@@ -5,6 +5,9 @@ import { CustomerRequirements } from "@/components/sales/CustomerRequirements";
 import { Negotiations } from "@/components/sales/Negotiations";
 import { Orders } from "@/components/sales/Orders";
 import { Pricing } from "@/components/sales/Pricing";
+import { Customers } from "@/components/sales/Customers";
+import { Visits } from "@/components/sales/Visits";
+import { Contacts } from "@/components/sales/Contacts";
 
 const Sales = () => {
   return (
@@ -16,13 +19,46 @@ const Sales = () => {
             إدارة متطلبات العملاء والتسعير والمفاوضات والطلبات
           </p>
         </div>
-        <Tabs defaultValue="requirements" className="space-y-4">
+        <Tabs defaultValue="customers" className="space-y-4">
           <TabsList className="w-full justify-start">
+            <TabsTrigger value="customers">العملاء</TabsTrigger>
+            <TabsTrigger value="visits">الزيارات</TabsTrigger>
+            <TabsTrigger value="contacts">الاتصالات</TabsTrigger>
             <TabsTrigger value="requirements">متطلبات العملاء</TabsTrigger>
             <TabsTrigger value="pricing">التسعير</TabsTrigger>
             <TabsTrigger value="negotiations">المفاوضات</TabsTrigger>
             <TabsTrigger value="orders">الطلبات</TabsTrigger>
           </TabsList>
+          <TabsContent value="customers">
+            <Card>
+              <CardHeader>
+                <CardTitle>العملاء</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Customers />
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="visits">
+            <Card>
+              <CardHeader>
+                <CardTitle>الزيارات</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Visits />
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="contacts">
+            <Card>
+              <CardHeader>
+                <CardTitle>الاتصالات</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Contacts />
+              </CardContent>
+            </Card>
+          </TabsContent>
           <TabsContent value="requirements">
             <Card>
               <CardHeader>

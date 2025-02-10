@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,7 +15,7 @@ import BalanceSheet from "./pages/BalanceSheet";
 import IncomeStatement from "./pages/IncomeStatement";
 import Sales from "./pages/Sales";
 import Trips from "./pages/Trips";
-import './App.css'; // استيراد ملف CSS
+import './App.css';
 
 const queryClient = new QueryClient();
 
@@ -26,16 +27,16 @@ const App = () => (
       <BrowserRouter>
         <nav className="navbar">
           <ul className="nav-list">
-            <li className="nav-item"><Link to="/">Home</Link></li>
-            <li className="nav-item"><Link to="/chart-of-accounts">Chart of Accounts</Link></li>
-            <li className="nav-item"><Link to="/journal-entries">Journal Entries</Link></li>
-            <li className="nav-item"><Link to="/trial-balance">Trial Balance</Link></li>
-            <li className="nav-item"><Link to="/customers">Customers</Link></li>
-            <li className="nav-item"><Link to="/suppliers">Suppliers</Link></li>
-            <li className="nav-item"><Link to="/balance-sheet">Balance Sheet</Link></li>
-            <li className="nav-item"><Link to="/income-statement">Income Statement</Link></li>
-            <li className="nav-item"><Link to="/sales">Sales</Link></li>
-            <li className="nav-item"><Link to="/trips">Trips</Link></li>
+            <li className="nav-item"><Link to="/">الرئيسية</Link></li>
+            <li className="nav-item"><Link to="/chart-of-accounts">دليل الحسابات</Link></li>
+            <li className="nav-item"><Link to="/journal-entries">قيود اليومية</Link></li>
+            <li className="nav-item"><Link to="/trial-balance">ميزان المراجعة</Link></li>
+            <li className="nav-item"><Link to="/customers">العملاء</Link></li>
+            <li className="nav-item"><Link to="/suppliers">الموردين</Link></li>
+            <li className="nav-item"><Link to="/balance-sheet">الميزانية العمومية</Link></li>
+            <li className="nav-item"><Link to="/income-statement">قائمة الدخل</Link></li>
+            <li className="nav-item"><Link to="/sales">المبيعات</Link></li>
+            <li className="nav-item"><Link to="/trips">الرحلات</Link></li>
           </ul>
         </nav>
         <Routes>

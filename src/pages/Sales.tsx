@@ -24,7 +24,7 @@ const Sales = () => {
             <TabsTrigger value="customers">العملاء</TabsTrigger>
             <TabsTrigger value="visits">الزيارات</TabsTrigger>
             <TabsTrigger value="contacts">الاتصالات</TabsTrigger>
-            <TabsTrigger value="requirements">متطلبات العملاء</TabsTrigger>
+            <TabsTrigger value="requirements">المتطلبات</TabsTrigger>
             <TabsTrigger value="pricing">التسعير</TabsTrigger>
             <TabsTrigger value="negotiations">المفاوضات</TabsTrigger>
             <TabsTrigger value="orders">الطلبات</TabsTrigger>

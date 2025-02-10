@@ -12,14 +12,14 @@ const Trips = () => {
         <div className="space-y-2">
           <h1 className="text-3xl font-bold tracking-tight">الرحلات</h1>
           <p className="text-muted-foreground">
-            إدارة الرحلات الثابتة والخاصة وحجوزات الطيران
+            حجوزات الطيراإدارة الرحلات الثابتة والخاصة وخدمات أخرى
           </p>
         </div>
         <Tabs defaultValue="fixed" className="space-y-4">
           <TabsList>
             <TabsTrigger value="fixed">الرحلات الثابتة</TabsTrigger>
             <TabsTrigger value="custom">الرحلات الخاصة</TabsTrigger>
-            <TabsTrigger value="flights">حجوزات الطيران</TabsTrigger>
+            <TabsTrigger value="flights">خدمات أخرى</TabsTrigger>
           </TabsList>
           <TabsContent value="fixed">
             <Card>

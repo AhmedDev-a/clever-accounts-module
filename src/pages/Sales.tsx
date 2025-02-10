@@ -1,13 +1,13 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Customers } from "@/components/sales/Customers";
-import { Contacts } from "@/components/sales/Contacts";
-import { Visits } from "@/components/sales/Visits";
-import { Offers } from "@/components/sales/Offers";
+import { CustomerRequirements } from "@/components/sales/CustomerRequirements";
 import { Negotiations } from "@/components/sales/Negotiations";
 import { Orders } from "@/components/sales/Orders";
 import { Pricing } from "@/components/sales/Pricing";
+import { Customers } from "@/components/sales/Customers";
+import { Visits } from "@/components/sales/Visits";
+import { Contacts } from "@/components/sales/Contacts";
 
 const Sales = () => {
   return (
@@ -16,36 +16,26 @@ const Sales = () => {
         <div className="space-y-2">
           <h1 className="text-3xl font-bold tracking-tight">المبيعات</h1>
           <p className="text-muted-foreground">
-            إدارة العملاء والمبيعات وعمليات التفاوض
+            إدارة متطلبات العملاء والتسعير والمفاوضات والطلبات
           </p>
         </div>
         <Tabs defaultValue="customers" className="space-y-4">
           <TabsList className="w-full justify-start">
             <TabsTrigger value="customers">العملاء</TabsTrigger>
-            <TabsTrigger value="contacts">الاتصالات</TabsTrigger>
             <TabsTrigger value="visits">الزيارات</TabsTrigger>
-            <TabsTrigger value="offers">العروض</TabsTrigger>
+            <TabsTrigger value="contacts">الاتصالات</TabsTrigger>
+            <TabsTrigger value="requirements">المتطلبات</TabsTrigger>
+            <TabsTrigger value="pricing">التسعير</TabsTrigger>
             <TabsTrigger value="negotiations">المفاوضات</TabsTrigger>
             <TabsTrigger value="orders">الطلبات</TabsTrigger>
-            <TabsTrigger value="pricing">التسعير</TabsTrigger>
           </TabsList>
           <TabsContent value="customers">
             <Card>
               <CardHeader>
-                <CardTitle>قائمة العملاء</CardTitle>
+                <CardTitle>العملاء</CardTitle>
               </CardHeader>
               <CardContent>
                 <Customers />
-              </CardContent>
-            </Card>
-          </TabsContent>
-          <TabsContent value="contacts">
-            <Card>
-              <CardHeader>
-                <CardTitle>سجل الاتصالات</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Contacts />
               </CardContent>
             </Card>
           </TabsContent>
@@ -59,13 +49,33 @@ const Sales = () => {
               </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="offers">
+          <TabsContent value="contacts">
             <Card>
               <CardHeader>
-                <CardTitle>العروض المقدمة</CardTitle>
+                <CardTitle>الاتصالات</CardTitle>
               </CardHeader>
               <CardContent>
-                <Offers />
+                <Contacts />
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="requirements">
+            <Card>
+              <CardHeader>
+                <CardTitle>متطلبات العملاء</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CustomerRequirements />
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="pricing">
+            <Card>
+              <CardHeader>
+                <CardTitle>التسعير</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Pricing />
               </CardContent>
             </Card>
           </TabsContent>
@@ -86,16 +96,6 @@ const Sales = () => {
               </CardHeader>
               <CardContent>
                 <Orders />
-              </CardContent>
-            </Card>
-          </TabsContent>
-          <TabsContent value="pricing">
-            <Card>
-              <CardHeader>
-                <CardTitle>التسعير</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Pricing />
               </CardContent>
             </Card>
           </TabsContent>

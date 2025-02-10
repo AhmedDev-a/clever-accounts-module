@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ChartOfAccounts from "./ChartOfAccounts";
 import JournalEntries from "./JournalEntries";
@@ -6,6 +7,7 @@ import Customers from "./Customers";
 import Suppliers from "./Suppliers";
 import BalanceSheet from "./BalanceSheet";
 import IncomeStatement from "./IncomeStatement";
+import Treasury from "./Treasury";
 
 const حسابات = () => (
   <BrowserRouter>
@@ -18,6 +20,7 @@ const حسابات = () => (
         <li className="nav-item"><Link to="/حسابات/الموردين">الموردين</Link></li>
         <li className="nav-item"><Link to="/حسابات/الميزانية">الميزانية</Link></li>
         <li className="nav-item"><Link to="/حسابات/بيان-الدخل">بيان الدخل</Link></li>
+        <li className="nav-item"><Link to="/حسابات/الخزينة">الخزينة</Link></li>
       </ul>
     </nav>
     <Routes>
@@ -28,6 +31,7 @@ const حسابات = () => (
       <Route path="/حسابات/الموردين" element={<Suppliers />} />
       <Route path="/حسابات/الميزانية" element={<BalanceSheet />} />
       <Route path="/حسابات/بيان-الدخل" element={<IncomeStatement />} />
+      <Route path="/حسابات/الخزينة" element={<Treasury />} />
     </Routes>
   </BrowserRouter>
 );

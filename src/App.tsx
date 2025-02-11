@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Accounting from "./pages/Accounting";
 import Sales from "./pages/Sales";
 import Trips from "./pages/Trips";
+import PricingForm from "./pages/PricingForm"; // استيراد نموذج التسعير
 import './App.css'; // استيراد ملف CSS
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
             <li className="nav-item"><Link to="/accounting">الحسابات</Link></li>
             <li className="nav-item"><Link to="/sales">المبيعات</Link></li>
             <li className="nav-item"><Link to="/trips">الرحلات</Link></li>
+            <li className="nav-item"><Link to="/pricing">التسعير</Link></li> {/* إضافة رابط لنموذج التسعير */}
           </ul>
         </nav>
         <Routes>
@@ -31,6 +33,7 @@ const App = () => (
           <Route path="/accounting/*" element={<Accounting />} />
           <Route path="/sales" element={<Sales />} />
           <Route path="/trips" element={<Trips />} />
+          <Route path="/pricing" element={<PricingForm />} /> {/* إضافة مسار لنموذج التسعير */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

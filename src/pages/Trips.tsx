@@ -12,7 +12,7 @@ const Trips = () => {
         <div className="space-y-2">
           <h1 className="text-3xl font-bold tracking-tight">الرحلات</h1>
           <p className="text-muted-foreground">
-            حجوزات الطيراإدارة الرحلات الثابتة والخاصة وخدمات أخرى
+            إدارة الرحلات الثابتة والخاصة وخدمات أخرى
           </p>
         </div>
         <Tabs defaultValue="fixed" className="space-y-4">

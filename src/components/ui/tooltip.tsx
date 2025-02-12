@@ -1,5 +1,9 @@
 import React from 'react';
 
-export const TooltipProvider: React.FC = ({ children }) => {
+interface TooltipProviderProps {
+  children: React.ReactNode;
+}
+
+export const TooltipProvider: React.FC<TooltipProviderProps> = ({ children }) => {
   return <div className="tooltip-provider">{children}</div>;
 };

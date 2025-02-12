@@ -1,5 +1,6 @@
+
 {
-  "name": "your-project-name",
+  "name": "clever-accounts-module",
   "version": "1.0.0",
   "description": "A brief description of your project",
   "main": "index.js",
@@ -9,12 +10,12 @@
   },
   "dependencies": {
     "nanoid": "^4.0.0",
-    "esbuild": "^0.15.0",
+    "esbuild": "^0.25.0",
     "vite": "^4.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react-swc": "^3.7.1"
   },
-  "author": "Your Name",
+  "author": "AhmedDev-a",
   "license": "MIT"
 }

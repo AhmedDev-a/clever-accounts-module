@@ -1,13 +1,18 @@
-import { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import * as XLSX from 'xlsx';
 
-const PricingForm = () => {
-  const [clientName, setClientName] = useState("");
-  const [requirements, setRequirements] = useState("");
-  const [pricingDetails, setPricingDetails] = useState([{ item: "", price: 0 }]);
+interface PricingDetail {
+  item: string;
+  price: number;
+}
 
-  const handleInputChange = (e) => {
+const PricingForm: React.FC = () => {
+  const [clientName, setClientName] = useState<string>("");
+  const [requirements, setRequirements] = useState<string>("");
+  const [pricingDetails, setPricingDetails] = useState<PricingDetail[]>([{ item: "", price: 0 }]);
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     if (name === "clientName") {
       setClientName(value);
@@ -16,10 +21,14 @@ const PricingForm = () => {
     }
   };
 
-  const handlePricingChange = (index, e) => {
+  const handlePricingChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const newPricingDetails = [...pricingDetails];
-    newPricingDetails[index][name] = name === "price" ? parseFloat(value) : value;
+    if (name === "price") {
+      newPricingDetails[index].price = parseFloat(value);
+    } else {
+      newPricingDetails[index].item = value;
+    }
     setPricingDetails(newPricingDetails);
   };
 
@@ -27,28 +36,28 @@ const PricingForm = () => {
     setPricingDetails([...pricingDetails, { item: "", price: 0 }]);
   };
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
+  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const data = new Uint8Array(event.target?.result as ArrayBuffer);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+        const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 }) as any[];
 
-    reader.onload = (event) => {
-      const data = new Uint8Array(event.target.result);
-      const workbook = XLSX.read(data, { type: 'array' });
-      const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+        const newPricingDetails = jsonData.slice(1).map(row => ({
+          item: row[0] || "",
+          price: row[1] || 0
+        }));
 
-      const newPricingDetails = jsonData.slice(1).map(row => ({
-        item: row[0] || "",
-        price: row[1] || 0
-      }));
-
-      setPricingDetails(newPricingDetails);
-    };
-
-    reader.readAsArrayBuffer(file);
+        setPricingDetails(newPricingDetails);
+      };
+      reader.readAsArrayBuffer(file);
+    }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
       await axios.post("/api/pricing", {
@@ -83,8 +92,8 @@ const PricingForm = () => {
             name="requirements"
             value={requirements}
             onChange={handleInputChange}
-            rows="5"
-            cols="50"
+            rows={5}
+            cols={50}
           />
         </label>
         <br />

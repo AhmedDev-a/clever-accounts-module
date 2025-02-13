@@ -1,0 +1,33 @@
+{
+  "name": "clever-accounts-module",
+  "version": "1.0.0",
+  "description": "A brief description of your project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest",
+    "build": "esbuild src/index.jsx --bundle --outdir=dist --loader:.js=jsx --external:react --external:react-dom --external:@tanstack/react-query --external:react-router-dom"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^4.0.0",
+    "@types/xlsx": "^0.0.35",
+    "axios": "^0.21.1",
+    "esbuild": "^0.25.0",
+    "nanoid": "^4.0.0",
+    "next-themes": "^0.0.15",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "sonner": "^1.7.4",
+    "vite": "^4.0.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react-swc": "^3.7.1",
+    "jest": "^26.6.0"
+  },
+  "author": "AhmedDev-a",
+  "license": "MIT"
+}

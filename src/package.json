@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "jest",
-    "build": "esbuild src/index.tsx --bundle --outdir=dist --loader:.js=jsx --external:react --external:react-dom --external:@tanstack/react-query --external:react-router-dom"
+    "build": "esbuild src/index.jsx --bundle --outdir=dist --loader:.js=jsx --external:react --external:react-dom --external:@tanstack/react-query --external:react-router-dom"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.0.0",

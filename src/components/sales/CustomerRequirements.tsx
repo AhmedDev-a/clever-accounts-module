@@ -9,9 +9,12 @@ import { customerRequirementsSchema, type CustomerRequirementsFormData } from "@
 import { CustomerDetailsFields } from "./forms/CustomerDetailsFields";
 import { ServicesRequirementsFields } from "./forms/ServicesRequirementsFields";
 import { TimingContactFields } from "./forms/TimingContactFields";
+import { useNavigate } from "react-router-dom";
 
 export const CustomerRequirements = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
+  
   const form = useForm<CustomerRequirementsFormData>({
     resolver: zodResolver(customerRequirementsSchema),
     defaultValues: {
@@ -28,10 +31,18 @@ export const CustomerRequirements = () => {
 
   const onSubmit = async (values: CustomerRequirementsFormData) => {
     console.log(values);
+    // هنا سنقوم بحفظ البيانات في التخزين المحلي لاستخدامها في صفحة التسعير
+    localStorage.setItem('customerRequirements', JSON.stringify(values));
+    
     toast({
       title: "تم إرسال متطلبات العميل",
-      description: "سيتم مراجعة الطلب وإعداد التسعير المناسب",
+      description: "سيتم توجيهك إلى صفحة التسعير",
     });
+
+    // الانتقال إلى صفحة التسعير
+    setTimeout(() => {
+      navigate('/sales', { state: { activeTab: 'pricing' } });
+    }, 1500);
   };
 
   return (

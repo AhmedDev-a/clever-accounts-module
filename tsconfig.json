@@ -1,19 +1,24 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "lib": ["dom", "es6"],
-    "jsx": "react-jsx",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "baseUrl": "./src",
+    "types": ["vite/client", "node"], // Ensures Vite and Node types are available
+    "baseUrl": ".", // Base directory for resolving non-relative module names
     "paths": {
-      "@/*": ["*"]
-    }
+      "@/*": ["src/*"] // Maps `@/` to the `src/` directory
+    },
+    "target": "es5", // Compile to ES5 (can be updated to a newer version if needed)
+    "module": "esnext", // Use `esnext` for modern module systems (better for Vite)
+    "lib": ["dom", "es6"], // Include DOM and ES6 libraries
+    "jsx": "react-jsx", // Use the new JSX transform (React 17+)
+    "moduleResolution": "node", // Use Node.js-style module resolution
+    "esModuleInterop": true, // Enable ES module interop
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "forceConsistentCasingInFileNames": true, // Ensure consistent file naming
+    "strict": true, // Enable all strict type-checking options
+    "noImplicitAny": true, // Disallow implicit `any` types
+    "allowJs": true, // Allow JavaScript files to be compiled (optional, useful for mixed projects)
+    "outDir": "./dist", // Output directory for compiled files (optional)
+    "rootDir": "./src", // Root directory for source files (optional)
+    "resolveJsonModule": true // Allow importing JSON modules (optional)
   },
-  "include": ["src"]
+  "include": ["src"] // Include files in the `src` directory
 }

@@ -1,29 +1,29 @@
-import js from "@eslint/js";
-import globals from "globals";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
-import tseslint from "typescript-eslint";
+const esbuild = require('esbuild');
+const path = require('path');
 
-export default tseslint.config(
-  { ignores: ["dist"] },
-  {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ["**/*.{ts,tsx}"],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
-    plugins: {
-      "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
-      ],
-      "@typescript-eslint/no-unused-vars": "off",
-    },
-  }
-);
+esbuild.build({
+  entryPoints: ['src/index.tsx'],
+  bundle: true,
+  outfile: 'dist/bundle.js', // Specify the output file
+  loader: { '.js': 'jsx' },
+  external: [
+    'react',
+    'react-dom',
+    '@tanstack/react-query',
+    'react-router-dom',
+    'class-variance-authority',
+    'zod',
+    '@radix-ui/react-select',
+    '@radix-ui/react-label',
+  ],
+  plugins: [
+    {
+      name: 'alias',
+      setup(build) {
+        build.onResolve({ filter: /^@\/(.*)$/ }, args => ({
+          path: path.resolve(__dirname, 'src', args.match[1])
+        }));
+      }
+    }
+  ],
+}).catch(() => process.exit(1));

@@ -2,16 +2,13 @@ import { build } from 'esbuild';
 import alias from 'esbuild-plugin-alias';
 
 build({
-  entryPoints: ['./src/index.tsx'],
+  entryPoints: ['src/index.tsx'],
   bundle: true,
-  outdir: 'dist',
-  loader: { '.js': 'jsx' },
-  external: ['react', 'react-dom', '@tanstack/react-query', 'react-router-dom'],
+  outfile: 'dist/bundle.js',
   plugins: [
     alias({
-      '@lib': './src/lib',
-      '@components': './src/components',
-      '@': './src',
+      '@': './src', 
     })
-  ]
+  ],
+  // Additional esbuild options
 }).catch(() => process.exit(1));

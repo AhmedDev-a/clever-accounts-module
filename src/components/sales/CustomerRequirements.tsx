@@ -31,7 +31,7 @@ export const CustomerRequirements = () => {
 
   const onSubmit = async (values: CustomerRequirementsFormData) => {
     console.log(values);
-    // هنا سنقوم بحفظ البيانات في التخزين المحلي لاستخدامها في صفحة التسعير
+    // حفظ البيانات في التخزين المحلي
     localStorage.setItem('customerRequirements', JSON.stringify(values));
     
     toast({

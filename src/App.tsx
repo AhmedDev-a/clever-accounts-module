@@ -1,18 +1,24 @@
 import React from "react";
-import {Toaster} from './components/ui/Toaster';
+import { Toaster } from "./components/ui/Toaster";
 import { Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
+// Import pages
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Sales from "./pages/Sales";
 import Trips from "./pages/Trips";
 import PricingForm from "./pages/PricingForm";
+
+// Import Accounting module
+import Accounting from "./modules/AccountingModule/Accounting";
 import AccountsReceivable from "./modules/AccountingModule/AccountsReceivable";
 import FinancialStatements from "./modules/AccountingModule/FinancialStatements";
 import GeneralLedger from "./modules/AccountingModule/GeneralLedger";
-import './App.css';
+
+import "./App.css";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +28,7 @@ const App: React.FC = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        {/* Navigation Bar */}
         <nav className="navbar">
           <ul className="nav-list">
             <li className="nav-item"><Link to="/">الرئيسية</Link></li>
@@ -31,11 +38,11 @@ const App: React.FC = () => (
             <li className="nav-item"><Link to="/pricing">التسعير</Link></li>
           </ul>
         </nav>
+
+        {/* Routes */}
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/accounting/receivable" element={<AccountsReceivable />} />
-          <Route path="/accounting/financial" element={<FinancialStatements />} />
-          <Route path="/accounting/ledger" element={<GeneralLedger />} />
+          <Route path="/accounting/*" element={<Accounting />} />
           <Route path="/sales" element={<Sales />} />
           <Route path="/trips" element={<Trips />} />
           <Route path="/pricing" element={<PricingForm />} />

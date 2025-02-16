@@ -1,24 +1,25 @@
+
 import React from "react";
-import { Toaster } from "./components/ui/Toaster";
-import { Sonner } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
-// Import pages
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Sales from "./pages/Sales";
 import Trips from "./pages/Trips";
 import PricingForm from "./pages/PricingForm";
-
-// Import Accounting module
-import Accounting from "./modules/AccountingModule/Accounting";
+import AccountingDashboard from "./modules/AccountingModule/AccountingDashboard";
 import AccountsReceivable from "./modules/AccountingModule/AccountsReceivable";
 import FinancialStatements from "./modules/AccountingModule/FinancialStatements";
 import GeneralLedger from "./modules/AccountingModule/GeneralLedger";
-
-import "./App.css";
+import ChartOfAccounts from "./modules/AccountingModule/ChartOfAccounts";
+import JournalEntries from "./modules/AccountingModule/JournalEntries";
+import TrialBalance from "./modules/AccountingModule/TrialBalance";
+import Customers from "./modules/AccountingModule/Customers";
+import Suppliers from "./modules/AccountingModule/Suppliers";
+import Treasury from "./modules/AccountingModule/Treasury";
+import './App.css';
 
 const queryClient = new QueryClient();
 
@@ -26,28 +27,42 @@ const App: React.FC = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
-      <Sonner />
       <BrowserRouter>
-        {/* Navigation Bar */}
-        <nav className="navbar">
-          <ul className="nav-list">
-            <li className="nav-item"><Link to="/">الرئيسية</Link></li>
-            <li className="nav-item"><Link to="/accounting">الحسابات</Link></li>
-            <li className="nav-item"><Link to="/sales">المبيعات</Link></li>
-            <li className="nav-item"><Link to="/trips">الرحلات</Link></li>
-            <li className="nav-item"><Link to="/pricing">التسعير</Link></li>
+        <nav className="navbar bg-white shadow-sm">
+          <ul className="nav-list flex items-center space-x-6 px-6 py-4 rtl:space-x-reverse">
+            <li className="nav-item">
+              <a href="/" className="text-gray-700 hover:text-gray-900">الرئيسية</a>
+            </li>
+            <li className="nav-item">
+              <a href="/accounting" className="text-gray-700 hover:text-gray-900">الحسابات</a>
+            </li>
+            <li className="nav-item">
+              <a href="/sales" className="text-gray-700 hover:text-gray-900">المبيعات</a>
+            </li>
+            <li className="nav-item">
+              <a href="/trips" className="text-gray-700 hover:text-gray-900">الرحلات</a>
+            </li>
           </ul>
         </nav>
-
-        {/* Routes */}
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/accounting/*" element={<Accounting />} />
-          <Route path="/sales" element={<Sales />} />
-          <Route path="/trips" element={<Trips />} />
-          <Route path="/pricing" element={<PricingForm />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <main className="min-h-screen bg-gray-50">
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/accounting" element={<AccountingDashboard />} />
+            <Route path="/accounting/receivable" element={<AccountsReceivable />} />
+            <Route path="/accounting/financial" element={<FinancialStatements />} />
+            <Route path="/accounting/ledger" element={<GeneralLedger />} />
+            <Route path="/accounting/chart" element={<ChartOfAccounts />} />
+            <Route path="/accounting/journal" element={<JournalEntries />} />
+            <Route path="/accounting/trial-balance" element={<TrialBalance />} />
+            <Route path="/accounting/customers" element={<Customers />} />
+            <Route path="/accounting/suppliers" element={<Suppliers />} />
+            <Route path="/accounting/treasury" element={<Treasury />} />
+            <Route path="/sales" element={<Sales />} />
+            <Route path="/trips" element={<Trips />} />
+            <Route path="/pricing" element={<PricingForm />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

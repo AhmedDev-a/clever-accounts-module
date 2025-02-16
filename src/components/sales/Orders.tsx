@@ -4,7 +4,14 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FileText, HandshakeIcon, PlayIcon } from "lucide-react";
 
-const orderStatuses = {
+type OrderStatus = "new" | "pricing" | "negotiation" | "contract" | "payment" | "execution" | "completed";
+
+interface OrderStatusConfig {
+  label: string;
+  color: string;
+}
+
+const orderStatuses: Record<OrderStatus, OrderStatusConfig> = {
   new: { label: "طلب جديد", color: "bg-blue-500" },
   pricing: { label: "قيد التسعير", color: "bg-yellow-500" },
   negotiation: { label: "قيد التفاوض", color: "bg-purple-500" },
@@ -14,7 +21,19 @@ const orderStatuses = {
   completed: { label: "مكتمل", color: "bg-gray-500" }
 };
 
-const sampleOrders = [
+interface Order {
+  id: number;
+  customerName: string;
+  status: OrderStatus;
+  services: string[];
+  totalAmount: number;
+  paidAmount: number;
+  customerType: string;
+  customerDetailsComplete: boolean;
+  negotiationComplete: boolean;
+}
+
+const sampleOrders: Order[] = [
   {
     id: 1,
     customerName: "شركة السياحة العالمية",
